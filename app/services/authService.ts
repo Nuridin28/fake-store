@@ -13,7 +13,7 @@ export const authService = {
             body: JSON.stringify(user),
         });
         if (!response.ok) {
-            throw new Error('Failed to create cart');
+            throw new Error('Failed to login');
         }
         return response.json();
     },

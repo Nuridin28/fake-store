@@ -15,12 +15,18 @@ export default function UsersPage() {
 
     const router = useRouter();
 
-    // @ts-ignore
-    const handleSubmit = async (e): Promise<void> => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
-        await authService.login(formData).then((res) => {
-            console.log(res);
-        })
+        try {
+            await authService.login(formData).then((res) => {
+                console.log(res);
+                localStorage.setItem('token', res.token);
+                router.push('/products');
+            })
+        } catch (error) {
+            alert('Failed to login' + error);
+        }
+                
     }
 
     return (
